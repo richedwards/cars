@@ -12,21 +12,24 @@ class Car
 		"I'm a car! I've driven #{@distance} and have #{@fuel} gallons gas left"
 	end
 
+	attr_accessor :color 
+
 	def initialize(color)
 		@fuel = 10
 		@distance = 0
-		@@total_car_count +=1
-		if @@cars_per_color[color] 		
-			@@cars_per_color[color] +=1
+		@color = color
+		@@total_car_count += 1
+		if @@cars_per_color[@color] 		
+			@@cars_per_color[@color] += 1
 		else
-			@@cars_per_color = 1
+			@@cars_per_color[@color] = 1
 		end
+		#puts @@cars_per_color
 	end
 	
-	def most_popular_color
-		@@cars_per_color.max_by{|k,v| v}
+	def self.most_popular_color
+		@@cars_per_color.max_by{|k,v| puts "#{k}: #{v}"}
 	end
-	
 	
 
 	# def color (color)
@@ -55,6 +58,7 @@ end
 
 car_a = Car.new("red")
 car_b = Car.new("red")
+# puts car_a.color
 # puts car_a
 # puts car_b
 # car_a.drive(10)
@@ -87,6 +91,6 @@ c1 = Car.new("blue")
 
 # best_color = Car.most_popular_color
 # Car.new(best_color)
-puts most_popular_color.key
+Car.most_popular_color
 
 
